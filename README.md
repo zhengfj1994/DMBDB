@@ -28,7 +28,7 @@ This project presents a comprehensive AI-powered workflow that combines:
 
 ## 1. Text Mining Pipeline
 
-The text mining pipeline uses Large Language Models (DeepSeek API) to automatically extract dietary biomarker information from scientific literature. The complete workflow includes 10 sequential steps:
+The text mining pipeline uses Large Language Models (DeepSeek API) to automatically extract dietary biomarker information from scientific literature. The complete workflow includes 11 sequential steps:
 
 ### 1.1 Literature Retrieval & Preprocessing
 
@@ -51,9 +51,8 @@ The text mining pipeline uses Large Language Models (DeepSeek API) to automatica
 - Extracts compressed tar.gz files
 - Prepares articles for text processing
 
-**Step 5: Transfer format.py**
-- Converts Markdown tables to CSV format
-- Standardizes data structure for downstream analysis
+**Step 5: Mineru**
+- Use Mineru to convert PDF files into Markdown format.
 
 **Step 6: Text cleaning.py**
 - Removes reference sections from articles
@@ -91,6 +90,10 @@ The text mining pipeline uses Large Language Models (DeepSeek API) to automatica
   - Analytic Procedure (e.g., HPLC, FT-ICR-MS)
   - Literature Name (PMCID)
 - **Output**: Markdown table consolidated into CSV
+
+**Step 11: Transfer format.py**
+- Converts Markdown tables to CSV format
+- Standardizes data structure for downstream analysis
 
 **Final Output**: `Supplementary Data S1 Text mining results.csv`
 
@@ -317,7 +320,7 @@ graph TD
     B --> C[Find FTP URLs.R<br/>Get Download Links]
     C --> D[download Literature.py<br/>Download tar.gz Files]
     D --> E[code tar.gz.py<br/>Extract Archives]
-    E --> F[Transfer format.py<br/>MD to CSV]
+    E --> F[Mineru<br/>pdf to MD]
     F --> G[Text cleaning.py<br/>Remove References]
     G --> H[Find biomarker.py<br/>LLM Extract Names]
     H --> I[Summary of Markers.py<br/>Aggregate Results]
@@ -325,21 +328,22 @@ graph TD
     J --> K[Extract specific info.py<br/>Get Detailed Data]
     K --> L[Supplementary Data S1<br/>Text Mining Results]
     L --> M[DMBDB Construction<br/>Supplementary Data S2]
+    M- > N[Transfer format.py<br/>MD to CSV]
 
-    N[LC-MS Raw Data] --> O[Quality Control<br/>metnormalizer.R]
-    O --> P[QC Corrected Data]
+    O[LC-MS Raw Data] --> P[Quality Control<br/>metnormalizer.R]
+    P --> Q[QC Corrected Data]
 
-    M --> Q[Data Annotation<br/>Using DMBDB]
-    P --> Q
-    Q --> R[Annotated Data<br/>Supplementary Data S5]
-    R --> S[Statistical Analysis<br/>Supplementary Data S6]
+    N --> R[Data Annotation<br/>Using DMBDB]
+    Q --> R
+    R --> S[Annotated Data<br/>Supplementary Data S5]
+    S --> T[Statistical Analysis<br/>Supplementary Data S6]
 
-    S --> T[Visualizations]
-    T --> U[Time Heatmap]
-    T --> V[Circular Heatmap]
-    T --> W[Trend Charts]
-    T --> X[Bubble Chart]
-    T --> Y[Category Tree]
+    T --> U[Visualizations]
+    U --> V[Time Heatmap]
+    U --> W[Circular Heatmap]
+    U --> X[Trend Charts]
+    U --> Y[Bubble Chart]
+    U --> Z[Category Tree]
 
     style M fill:#ff9999
     style Q fill:#99ccff
@@ -384,7 +388,7 @@ python "Text mining code/download Literature.py"
 
 # Step 4-6: Process and clean text
 python "Text mining code/code tar.gz.py"
-python "Text mining code/Transfer format.py"
+mineru:https://mineru.net/ or deploy the mineru model locally
 python "Text mining code/Text cleaning.py"
 
 # Step 7-10: Extract biomarker information using LLM
@@ -393,6 +397,9 @@ python "Text mining code/Summary of Markers.py"
 python "Text mining code/Extract section.py"
 python "Text mining code/Extract specific information.py"
 ```
+
+# Step 11: Output the data in CSV format.
+python "Text mining code/Transfer format.py
 
 **Note**: Remember to configure your DeepSeek API key in each script that uses the LLM.
 
@@ -534,7 +541,7 @@ We welcome contributions to improve DMBDB and the analysis pipeline:
 
 ## 14. License
 
-[License information to be added]
+MIT License
 
 ## 15. Contact
 
@@ -554,4 +561,4 @@ For questions, collaborations, or support:
 
 **Last Updated**: 2025-10-15
 
-**Repository Maintainers**: [To be added]
+**Repository Maintainers**: Fujian Zheng；Zijun Nie
