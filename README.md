@@ -316,7 +316,7 @@ The core database (`Supplementary Data S2 DMBDB.csv`) contains comprehensive inf
 
 ```mermaid
 graph TD
-    A[Article Titles] --> B[Download PMCID.py<br/>Get PMID/PMCID/DOI]
+    A[Workflow Start] --> B[Download PMCID.py<br/>Get PMID/PMCID/DOI]
     B --> C[Find FTP URLs.R<br/>Get Download Links]
     C --> D[download Literature.py<br/>Download tar.gz Files]
     D --> E[code tar.gz.py<br/>Extract Archives]
