@@ -328,7 +328,7 @@ graph TD
     J --> K[Extract specific info.py<br/>Get Detailed Data]
     K --> L[Supplementary Data S1<br/>Text Mining Results]
     L --> M[DMBDB Construction<br/>Supplementary Data S2]
-    M- > N[Transfer format.py<br/>MD to CSV]
+    M --> N[Transfer format.py<br/>MD to CSV]
 
     O[LC-MS Raw Data] --> P[Quality Control<br/>metnormalizer.R]
     P --> Q[QC Corrected Data]
