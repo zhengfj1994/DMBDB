@@ -143,14 +143,17 @@ threads = 4           # Parallel threads
 ### 2.2 Installation
 
 ```r
-install.packages("MetNormalizer")
+if(!require(devtools)){
+install.packages("devtools")
+}
+devtools::install_github("jaspershen/MetNormalizer")
 ```
 
 ### 2.3 Output
 
 **`QC correction results.xlsx`** - Normalized and quality-controlled metabolomics data ready for downstream analysis
 
-**Reference**: [MetNormalizer on CRAN](https://CRAN.R-project.org/package=MetNormalizer)
+**Reference**: [MetNormalizer on GitHub](https://github.com/jaspershen/MetNormalizer)
 
 ## 3. Data Visualization
 
@@ -274,7 +277,9 @@ library(ggtree)
 pip install pandas numpy matplotlib seaborn scikit-learn openpyxl
 
 # R packages
-install.packages(c("treeio", "ggplot2", "ggtree"))
+BiocManager::install("treeio")
+BiocManager::install("ggtree")
+install.packages("ggplot2")
 ```
 
 ## 4. Supplementary Tables
@@ -473,10 +478,10 @@ pip install openpyxl>=3.0.0
 
 **Required Packages**:
 ```r
-install.packages("MetNormalizer")
-install.packages("treeio")
+devtools::install_github("jaspershen/MetNormalizer")
+BiocManager::install("treeio")
 install.packages("ggplot2")
-install.packages("ggtree")
+BiocManager::install("ggtree")
 ```
 
 ### 9.3 API Requirements
