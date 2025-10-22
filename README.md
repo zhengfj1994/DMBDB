@@ -22,7 +22,7 @@ This project presents a comprehensive AI-powered workflow that combines:
 │   ├── Metabolic trend chart/    # Individual metabolite trends
 │   ├── Bubble score chart/       # Scoring visualizations
 │   └── Dietary biomarker categories/ # Phylogenetic tree-style classification
-├── Supplementary Data/            # Research datasets and DMBDB
+├── Supplementary Tables/          # Research datasets and DMBDB
 └── Large Language Model-Generated Dietary Metabolite Biomarker Database...docx
 ```
 
@@ -95,7 +95,7 @@ The text mining pipeline uses Large Language Models (DeepSeek API) to automatica
 - Converts Markdown tables to CSV format
 - Standardizes data structure for downstream analysis
 
-**Final Output**: `Supplementary Data S1 Text mining results.csv`
+**Final Output**: `Supplementary Table 2 Text mining results of dietary biomarkers.csv`
 
 ### 1.3 Installation & Setup
 
@@ -277,22 +277,23 @@ pip install pandas numpy matplotlib seaborn scikit-learn openpyxl
 install.packages(c("treeio", "ggplot2", "ggtree"))
 ```
 
-## 4. Supplementary Data
+## 4. Supplementary Tables
 
-The `Supplementary Data/` folder contains all research datasets and database files:
+The `Supplementary Tables/` folder contains all research datasets and database files:
 
 | File | Description | Content |
 |------|-------------|---------|
-| **Supplementary Data S1** | Text mining results | Extracted dietary biomarkers with metadata from literature analysis |
-| **Supplementary Data S2** | DMBDB (CSV format) | Core Dietary Metabolite Biomarker Database with chemical structures |
-| **Supplementary Data S3** | LC-MS database (Excel) | Extended dietary biomarker LC-MS database (Open Source Data only) |
-| **Supplementary Data S4** | Text mining scores | Scoring metrics for biomarker extraction quality |
-| **Supplementary Data S5** | Original data annotation | Metabolomics annotation results from experimental data |
-| **Supplementary Data S6** | Differential analysis | Statistical analysis results comparing metabolite levels |
+| **Supplementary Table 1** | DMBDB Information | Core Dietary Metabolite Biomarker Database with chemical structures |
+| **Supplementary Table 2** | Text mining results of dietary biomarkers | Extracted dietary biomarkers with metadata from literature analysis |
+| **Supplementary Table 3** | List of Title and Number Correspondence of Literature | Mapping between literature titles and their assigned numbers |
+| **Supplementary Table 4** | Dietary biomarker LC-MS database (Only Open Source Data) | Extended dietary biomarker LC-MS database |
+| **Supplementary Table 5** | The performance of text mining | Performance metrics and scoring for biomarker extraction quality |
+| **Supplementary Table 6** | Annotation results | Metabolomics annotation results from experimental data |
+| **Supplementary Table 7** | Statistical analysis | Statistical analysis results comparing metabolite levels |
 
 ### 4.1 DMBDB - Dietary Metabolite Biomarker Database
 
-The core database (`Supplementary Data S2 DMBDB.csv`) contains comprehensive information for each dietary biomarker:
+The core database (`Supplementary Table 1 DMBDB Information.csv`) contains comprehensive information for each dietary biomarker:
 
 **Database Fields**:
 - **Biomarker ID & Name**: Unique identifier and standardized name
@@ -326,8 +327,8 @@ graph TD
     H --> I[Summary of Markers.py<br/>Aggregate Results]
     I --> J[Extract section.py<br/>Get Descriptions]
     J --> K[Extract specific info.py<br/>Get Detailed Data]
-    K --> L[Supplementary Data S1<br/>Text Mining Results]
-    L --> M[DMBDB Construction<br/>Supplementary Data S2]
+    K --> L[Supplementary Table 2<br/>Text Mining Results]
+    L --> M[DMBDB Construction<br/>Supplementary Table 1]
     M --> N[Transfer format.py<br/>MD to CSV]
 
     O[LC-MS Raw Data] --> P[Quality Control<br/>metnormalizer.R]
@@ -335,8 +336,8 @@ graph TD
 
     N --> R[Data Annotation<br/>Using DMBDB]
     Q --> R
-    R --> S[Annotated Data<br/>Supplementary Data S5]
-    S --> T[Statistical Analysis<br/>Supplementary Data S6]
+    R --> S[Annotated Data<br/>Supplementary Table 6]
+    S --> T[Statistical Analysis<br/>Supplementary Table 7]
 
     T --> U[Visualizations]
     U --> V[Time Heatmap]
@@ -494,12 +495,14 @@ install.packages("ggtree")
 
 ## 10. Data Availability
 
-All supplementary data files are included in the `Supplementary Data/` folder:
-- ✅ Text mining results (CSV format)
-- ✅ DMBDB database (CSV/Excel formats)
-- ✅ QC corrected data (Excel format)
-- ✅ Annotation and differential analysis results (Excel format)
-- ✅ Text mining scores and quality metrics
+All supplementary data files are included in the `Supplementary Tables/` folder:
+- ✅ DMBDB database (CSV format)
+- ✅ Text mining results of dietary biomarkers (CSV format)
+- ✅ List of Title and Number Correspondence of Literature (Excel format)
+- ✅ Dietary biomarker LC-MS database (Excel format, Open Source Data only)
+- ✅ Text mining performance metrics and quality scores (Excel format)
+- ✅ Annotation results (Excel format)
+- ✅ Statistical analysis results (Excel format)
 
 **Note**: Some intermediate files (downloaded literature, extracted text) are not included due to size constraints but can be regenerated using the provided scripts.
 
