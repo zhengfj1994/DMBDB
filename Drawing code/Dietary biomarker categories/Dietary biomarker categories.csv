@@ -1,176 +1,185 @@
 id,class,superclass,number
-1,2-arylbenzofuran flavonoids,Phenylpropanoids and polyketides,5
-2,Alpha-methyldeoxybenzoin flavonoids,Phenylpropanoids and polyketides,5
-3,Cinnamaldehydes,Phenylpropanoids and polyketides,1
-4,Cinnamic acids and derivatives,Phenylpropanoids and polyketides,79
-5,Coumarins and derivatives,Phenylpropanoids and polyketides,40
-6,Depsides and depsidones,Phenylpropanoids and polyketides,3
-7,Diarylheptanoids,Phenylpropanoids and polyketides,9
-8,Flavonoids,Phenylpropanoids and polyketides,381
-9,Isoflavonoids,Phenylpropanoids and polyketides,52
-10,"Linear 1,3-diarylpropanoids",Phenylpropanoids and polyketides,7
-11,Macrolactams,Phenylpropanoids and polyketides,1
-12,Macrolide lactams,Phenylpropanoids and polyketides,1
-13,Macrolides and analogues,Phenylpropanoids and polyketides,3
-14,Ochratoxins and related substances,Phenylpropanoids and polyketides,1
-15,Phenylpropanoic acids,Phenylpropanoids and polyketides,43
-16,Sterigmatocystins,Phenylpropanoids and polyketides,1
-17,Stilbenes,Phenylpropanoids and polyketides,39
-18,Tannins,Phenylpropanoids and polyketides,19
-19,Allyl sulfur compounds,Organosulfur compounds,5
-20,Isothiocyanates,Organosulfur compounds,5
-21,Organic disulfides,Organosulfur compounds,3
-22,Organic trisulfides,Organosulfur compounds,1
-23,Sulfonyls,Organosulfur compounds,2
-24,Sulfoxides,Organosulfur compounds,6
-25,Thiocyanates,Organosulfur compounds,1
-26,Thioethers,Organosulfur compounds,1
-27,Thiols,Organosulfur compounds,1
-28,Organometalloid compounds,Organometallic compounds,15
-29,Azaspirodecane derivatives,Organoheterocyclic compounds,1
-30,Azetidines,Organoheterocyclic compounds,1
-31,Azobenzenes,Organoheterocyclic compounds,1
-32,Azoles,Organoheterocyclic compounds,19
-33,Azolidines,Organoheterocyclic compounds,2
-34,Azolines,Organoheterocyclic compounds,1
-35,Benzimidazoles,Organoheterocyclic compounds,4
-36,Benzodioxanes,Organoheterocyclic compounds,1
-37,Benzodioxins,Organoheterocyclic compounds,2
-38,Benzodioxoles,Organoheterocyclic compounds,3
-39,Benzofurans,Organoheterocyclic compounds,4
-40,Benzopyrans,Organoheterocyclic compounds,19
-41,Benzothiazoles,Organoheterocyclic compounds,3
-42,Benzoxazines,Organoheterocyclic compounds,6
-43,Benzoxazoles,Organoheterocyclic compounds,3
-44,Bi- and oligothiophenes,Organoheterocyclic compounds,2
-45,Biotin and derivatives,Organoheterocyclic compounds,4
-46,Coumarans,Organoheterocyclic compounds,1
-47,Diazanaphthalenes,Organoheterocyclic compounds,4
-48,Diazinanes,Organoheterocyclic compounds,3
-49,Diazines,Organoheterocyclic compounds,28
-50,Dihydrofurans,Organoheterocyclic compounds,16
-51,Dihydrothiophenes,Organoheterocyclic compounds,1
-52,Dioxepanes,Organoheterocyclic compounds,1
-53,Dioxolanes,Organoheterocyclic compounds,1
-54,Dithiolanes,Organoheterocyclic compounds,1
-55,Epoxides,Organoheterocyclic compounds,2
-56,Furans,Organoheterocyclic compounds,2
-57,Furofurans,Organoheterocyclic compounds,1
-58,Furopyrans,Organoheterocyclic compounds,1
-59,Heteroaromatic compounds,Organoheterocyclic compounds,10
-60,Imidazodiazepines,Organoheterocyclic compounds,1
-61,Imidazopyridines,Organoheterocyclic compounds,2
-62,Imidazopyrimidines,Organoheterocyclic compounds,36
-63,Indoles and derivatives,Organoheterocyclic compounds,69
-64,Indolizidines,Organoheterocyclic compounds,1
-65,Isoindoles and derivatives,Organoheterocyclic compounds,2
-66,Isoquinolines and derivatives,Organoheterocyclic compounds,8
-67,Lactams,Organoheterocyclic compounds,1
-68,Lactones,Organoheterocyclic compounds,16
-69,Naphthofurans,Organoheterocyclic compounds,4
-70,Naphthopyrans,Organoheterocyclic compounds,2
-71,Oxanes,Organoheterocyclic compounds,3
-72,Oxepanes,Organoheterocyclic compounds,5
-73,Piperidines,Organoheterocyclic compounds,5
-74,Pteridines and derivatives,Organoheterocyclic compounds,15
-75,Pyrans,Organoheterocyclic compounds,5
-76,Pyridines and derivatives,Organoheterocyclic compounds,58
-77,Pyridopyrimidines,Organoheterocyclic compounds,1
-78,Pyrroles,Organoheterocyclic compounds,1
-79,Pyrrolidines,Organoheterocyclic compounds,7
-80,Pyrrolines,Organoheterocyclic compounds,1
-81,Pyrrolizines,Organoheterocyclic compounds,2
-82,Pyrrolopyridines,Organoheterocyclic compounds,1
-83,Pyrrolopyrimidines,Organoheterocyclic compounds,1
-84,Quinolines and derivatives,Organoheterocyclic compounds,23
-85,Tetrahydrofurans,Organoheterocyclic compounds,1
-86,Tetrahydroisoquinolines,Organoheterocyclic compounds,1
-87,Tetrapyrroles and derivatives,Organoheterocyclic compounds,34
-88,Triazines,Organoheterocyclic compounds,2
-89,Alkyl halides,Organohalogen compounds,11
-90,Organofluorides,Organohalogen compounds,3
-91,Organoiodides,Organohalogen compounds,1
-92,Vinyl halides,Organohalogen compounds,1
-93,Phosphorothioate polynucleotides,Organic Polymers,1
-94,Polypeptides,Organic Polymers,30
-95,Polysaccharides,Organic Polymers,1
-96,Organic oxides,Organic oxygen compounds,4
-97,Organic oxoanionic compounds,Organic oxygen compounds,1
-98,Organooxygen compounds,Organic oxygen compounds,540
-99,Organonitrogen compounds,Organic nitrogen compounds,71
-100,Carboximidic acids and derivatives,Organic acids and derivatives,9
-101,Carboxylic acids and derivatives,Organic acids and derivatives,827
-102,Hydroxy acids and derivatives,Organic acids and derivatives,52
-103,Keto acids and derivatives,Organic acids and derivatives,49
-104,Organic carbonic acids and derivatives,Organic acids and derivatives,5
-105,Organic dithiophosphoric acids and derivatives,Organic acids and derivatives,4
-106,Organic phosphoric acids and derivatives,Organic acids and derivatives,15
-107,Organic sulfonic acids and derivatives,Organic acids and derivatives,4
-108,Organic sulfuric acids and derivatives,Organic acids and derivatives,84
-109,Organic thiophosphoric acids and derivatives,Organic acids and derivatives,3
-110,Peptidomimetics,Organic acids and derivatives,13
-111,Sulfinic acids and derivatives,Organic acids and derivatives,2
-112,Thiosulfinic acid esters,Organic acids and derivatives,1
-113,(5'->5')-dinucleotides,"Nucleosides, nucleotides, and analogues",6
-114,5'-deoxyribonucleosides,"Nucleosides, nucleotides, and analogues",10
-115,Flavin nucleotides,"Nucleosides, nucleotides, and analogues",2
-116,Imidazole ribonucleosides and ribonucleotides,"Nucleosides, nucleotides, and analogues",1
-117,Nucleoside and nucleotide analogues,"Nucleosides, nucleotides, and analogues",1
-118,Purine nucleosides,"Nucleosides, nucleotides, and analogues",27
-119,Purine nucleotides,"Nucleosides, nucleotides, and analogues",25
-120,Pyridine nucleotides,"Nucleosides, nucleotides, and analogues",2
-121,Pyrimidine nucleosides,"Nucleosides, nucleotides, and analogues",16
-122,Pyrimidine nucleotides,"Nucleosides, nucleotides, and analogues",16
-123,Ribonucleoside 3'-phosphates,"Nucleosides, nucleotides, and analogues",1
-124,Alkali metal salts,Mixed metal/non-metal compounds,2
-125,Alkaline earth metal oxoanionic compounds,Mixed metal/non-metal compounds,4
-126,Metalloid organides,Mixed metal/non-metal compounds,2
-127,Metalloid salts,Mixed metal/non-metal compounds,1
-128,Miscellaneous mixed metal/non-metals,Mixed metal/non-metal compounds,5
-129,Transition metal organides,Mixed metal/non-metal compounds,2
-130,Transition metal oxoanionic compounds,Mixed metal/non-metal compounds,2
-131,Endocannabinoids,Lipids and lipid-like molecules,4
-132,Fatty Acyls,Lipids and lipid-like molecules,711
-133,Glycerolipids,Lipids and lipid-like molecules,81
-134,Glycerophospholipids,Lipids and lipid-like molecules,289
-135,Prenol lipids,Lipids and lipid-like molecules,287
-136,Saccharolipids,Lipids and lipid-like molecules,1
-137,Sphingolipids,Lipids and lipid-like molecules,62
-138,Steroids and steroid derivatives,Lipids and lipid-like molecules,329
-139,Aryltetralin lignans,"Lignans, neolignans and related compounds",1
-140,Dibenzylbutane lignans,"Lignans, neolignans and related compounds",6
-141,Furanoid lignans,"Lignans, neolignans and related compounds",21
-142,Lignan glycosides,"Lignans, neolignans and related compounds",6
-143,Lignan lactones,"Lignans, neolignans and related compounds",4
-144,Saturated hydrocarbons,Hydrocarbons,37
-145,Unsaturated hydrocarbons,Hydrocarbons,10
-146,Halogen organides,Homogeneous non-metal compounds,2
-147,Homogeneous halogens,Homogeneous non-metal compounds,2
-148,Homogeneous other non-metal compounds,Homogeneous non-metal compounds,10
-149,Non-metal oxoanionic compounds,Homogeneous non-metal compounds,11
-150,Other non-metal organides,Homogeneous non-metal compounds,11
-151,Homogeneous alkali metal compounds,Homogeneous metal compounds,6
-152,Homogeneous alkaline earth metal compounds,Homogeneous metal compounds,4
-153,Homogeneous lanthanide compounds,Homogeneous metal compounds,3
-154,Homogeneous metalloid compounds,Homogeneous metal compounds,3
-155,Homogeneous post-transition metal compounds,Homogeneous metal compounds,4
-156,Homogeneous transition metal compounds,Homogeneous metal compounds,19
-157,Anthracenes,Benzenoids,1
-158,Benzene and substituted derivatives,Benzenoids,234
-159,Fluorenes,Benzenoids,3
-160,Indanes,Benzenoids,1
-161,Indenes and isoindenes,Benzenoids,1
-162,Naphthalenes,Benzenoids,8
-163,Phenanthrenes and derivatives,Benzenoids,3
-164,Phenol esters,Benzenoids,4
-165,Phenol ethers,Benzenoids,14
-166,Phenols,Benzenoids,118
-167,Pyrenes,Benzenoids,7
-168,Aporphines,Alkaloids and derivatives,2
-169,Aspidospermatan-type alkaloids,Alkaloids and derivatives,1
-170,Benzophenanthridine alkaloids,Alkaloids and derivatives,1
-171,Cytochalasans,Alkaloids and derivatives,1
-172,Ergoline and derivatives,Alkaloids and derivatives,17
-173,Morphinans,Alkaloids and derivatives,1
-174,Protoberberine alkaloids and derivatives,Alkaloids and derivatives,1
-175,Tropane alkaloids,Alkaloids and derivatives,3
+1,Aporphines,Alkaloids and derivatives,3
+2,Aspidospermatan-type alkaloids,Alkaloids and derivatives,1
+3,Benzophenanthridine alkaloids,Alkaloids and derivatives,3
+4,Betalains,Alkaloids and derivatives,1
+5,Camptothecins,Alkaloids and derivatives,2
+6,Cinchona alkaloids,Alkaloids and derivatives,1
+7,Corynanthean-type alkaloids,Alkaloids and derivatives,1
+8,Protoberberine alkaloids and derivatives,Alkaloids and derivatives,1
+9,Protopine alkaloids,Alkaloids and derivatives,1
+10,Tropane alkaloids,Alkaloids and derivatives,3
+11,Anthracenes,Benzenoids,1
+12,Benzene and substituted derivatives,Benzenoids,243
+13,Fluorenes,Benzenoids,7
+14,Indanes,Benzenoids,2
+15,Indenes and isoindenes,Benzenoids,1
+16,Naphthacenes,Benzenoids,1
+17,Naphthalenes,Benzenoids,14
+18,Phenanthrenes and derivatives,Benzenoids,12
+19,Phenol esters,Benzenoids,8
+20,Phenol ethers,Benzenoids,8
+21,Phenols,Benzenoids,135
+22,Pyrenes,Benzenoids,8
+23,Tetralins,Benzenoids,2
+24,Homogeneous actinide compounds,Homogeneous metal compounds,1
+25,Homogeneous alkali metal compounds,Homogeneous metal compounds,3
+26,Homogeneous alkaline earth metal compounds,Homogeneous metal compounds,3
+27,Homogeneous lanthanide compounds,Homogeneous metal compounds,2
+28,Homogeneous metalloid compounds,Homogeneous metal compounds,3
+29,Homogeneous transition metal compounds,Homogeneous metal compounds,9
+30,Homogeneous halogens,Homogeneous non-metal compounds,4
+31,Homogeneous other non-metal compounds,Homogeneous non-metal compounds,8
+32,Non-metal oxoanionic compounds,Homogeneous non-metal compounds,8
+33,Other non-metal organides,Homogeneous non-metal compounds,8
+34,Polycyclic hydrocarbons,Hydrocarbons,2
+35,Saturated hydrocarbons,Hydrocarbons,26
+36,Unsaturated hydrocarbons,Hydrocarbons,16
+37,Aryltetralin lignans,"Lignans, neolignans and related compounds",1
+38,Dibenzylbutane lignans,"Lignans, neolignans and related compounds",7
+39,Furanoid lignans,"Lignans, neolignans and related compounds",23
+40,Lignan glycosides,"Lignans, neolignans and related compounds",4
+41,Lignan lactones,"Lignans, neolignans and related compounds",2
+42,Endocannabinoids,Lipids and lipid-like molecules,4
+43,Fatty Acyls,Lipids and lipid-like molecules,579
+44,Glycerolipids,Lipids and lipid-like molecules,49
+45,Glycerophospholipids,Lipids and lipid-like molecules,151
+46,Prenol lipids,Lipids and lipid-like molecules,390
+47,Saccharolipids,Lipids and lipid-like molecules,3
+48,Sphingolipids,Lipids and lipid-like molecules,44
+49,Steroids and steroid derivatives,Lipids and lipid-like molecules,338
+50,Alkali metal salts,Mixed metal/non-metal compounds,1
+51,Miscellaneous mixed metal/non-metals,Mixed metal/non-metal compounds,3
+52,Post-transition metal oxoanionic compounds,Mixed metal/non-metal compounds,1
+53,Transition metal organides,Mixed metal/non-metal compounds,3
+54,Transition metal oxoanionic compounds,Mixed metal/non-metal compounds,1
+55,(3'->5')-dinucleotides and analogues,"Nucleosides, nucleotides, and analogues",1
+56,(5'->5')-dinucleotides,"Nucleosides, nucleotides, and analogues",2
+57,5'-deoxyribonucleosides,"Nucleosides, nucleotides, and analogues",4
+58,Flavin nucleotides,"Nucleosides, nucleotides, and analogues",2
+59,Imidazole ribonucleosides and ribonucleotides,"Nucleosides, nucleotides, and analogues",1
+60,Nucleoside and nucleotide analogues,"Nucleosides, nucleotides, and analogues",2
+61,Purine nucleosides,"Nucleosides, nucleotides, and analogues",22
+62,Purine nucleotides,"Nucleosides, nucleotides, and analogues",21
+63,Pyridine nucleotides,"Nucleosides, nucleotides, and analogues",2
+64,Pyrimidine nucleosides,"Nucleosides, nucleotides, and analogues",18
+65,Pyrimidine nucleotides,"Nucleosides, nucleotides, and analogues",9
+66,Pyrrolopyrimidine nucleosides and nucleotides,"Nucleosides, nucleotides, and analogues",2
+67,Ribonucleoside 3'-phosphates,"Nucleosides, nucleotides, and analogues",4
+68,"Allyl-type 1,3-dipolar organic compounds","Organic 1,3-dipolar compounds",2
+69,Polypeptides,Organic Polymers,10
+70,Carbothioic S-acids,Organic acids and derivatives,1
+71,Carboximidic acids and derivatives,Organic acids and derivatives,8
+72,Carboxylic acids and derivatives,Organic acids and derivatives,560
+73,Hydroxy acids and derivatives,Organic acids and derivatives,53
+74,Keto acids and derivatives,Organic acids and derivatives,47
+75,Organic carbonic acids and derivatives,Organic acids and derivatives,7
+76,Organic dithiophosphoric acids and derivatives,Organic acids and derivatives,2
+77,Organic phosphonic acids and derivatives,Organic acids and derivatives,1
+78,Organic phosphoric acids and derivatives,Organic acids and derivatives,10
+79,Organic sulfonic acids and derivatives,Organic acids and derivatives,3
+80,Organic sulfuric acids and derivatives,Organic acids and derivatives,74
+81,Organic thiophosphoric acids and derivatives,Organic acids and derivatives,2
+82,Peptidomimetics,Organic acids and derivatives,17
+83,Sulfinic acids and derivatives,Organic acids and derivatives,2
+84,Thiosulfinic acid esters,Organic acids and derivatives,2
+85,Vinylogous acids,Organic acids and derivatives,2
+86,Organonitrogen compounds,Organic nitrogen compounds,68
+87,Organic oxides,Organic oxygen compounds,2
+88,Organic oxoanionic compounds,Organic oxygen compounds,1
+89,Organooxygen compounds,Organic oxygen compounds,492
+90,Alkyl halides,Organohalogen compounds,2
+91,Halohydrins,Organohalogen compounds,1
+92,Organofluorides,Organohalogen compounds,1
+93,Vinyl halides,Organohalogen compounds,1
+94,Azaspirodecane derivatives,Organoheterocyclic compounds,1
+95,Azetidines,Organoheterocyclic compounds,1
+96,Azobenzenes,Organoheterocyclic compounds,2
+97,Azoles,Organoheterocyclic compounds,20
+98,Azolidines,Organoheterocyclic compounds,5
+99,Azolines,Organoheterocyclic compounds,1
+100,Benzazepines,Organoheterocyclic compounds,1
+101,Benzimidazoles,Organoheterocyclic compounds,1
+102,Benzodioxanes,Organoheterocyclic compounds,1
+103,Benzodioxins,Organoheterocyclic compounds,1
+104,Benzodioxoles,Organoheterocyclic compounds,5
+105,Benzofurans,Organoheterocyclic compounds,4
+106,Benzopyrans,Organoheterocyclic compounds,19
+107,Benzothiazoles,Organoheterocyclic compounds,2
+108,Benzothiophenes,Organoheterocyclic compounds,1
+109,Benzotriazoles,Organoheterocyclic compounds,1
+110,Benzoxadiazoles,Organoheterocyclic compounds,1
+111,Benzoxazines,Organoheterocyclic compounds,7
+112,Benzoxazoles,Organoheterocyclic compounds,1
+113,Biotin and derivatives,Organoheterocyclic compounds,2
+114,Diazanaphthalenes,Organoheterocyclic compounds,7
+115,Diazines,Organoheterocyclic compounds,32
+116,Dihydrofurans,Organoheterocyclic compounds,13
+117,Dihydrothiophenes,Organoheterocyclic compounds,1
+118,Dithianes,Organoheterocyclic compounds,1
+119,Dithiolanes,Organoheterocyclic compounds,2
+120,Epoxides,Organoheterocyclic compounds,4
+121,Furans,Organoheterocyclic compounds,2
+122,Furofurans,Organoheterocyclic compounds,1
+123,Furopyrans,Organoheterocyclic compounds,2
+124,Heteroaromatic compounds,Organoheterocyclic compounds,7
+125,Imidazopyridines,Organoheterocyclic compounds,1
+126,Imidazopyrimidines,Organoheterocyclic compounds,39
+127,Indoles and derivatives,Organoheterocyclic compounds,73
+128,Isoindoles and derivatives,Organoheterocyclic compounds,3
+129,Isoquinolines and derivatives,Organoheterocyclic compounds,8
+130,Lactams,Organoheterocyclic compounds,1
+131,Lactones,Organoheterocyclic compounds,18
+132,Naphthofurans,Organoheterocyclic compounds,5
+133,Naphthopyrans,Organoheterocyclic compounds,3
+134,Oxanes,Organoheterocyclic compounds,3
+135,Oxazinanes,Organoheterocyclic compounds,1
+136,Oxepanes,Organoheterocyclic compounds,5
+137,Piperazinoazepines,Organoheterocyclic compounds,1
+138,Piperidines,Organoheterocyclic compounds,2
+139,Pteridines and derivatives,Organoheterocyclic compounds,19
+140,Pyrans,Organoheterocyclic compounds,3
+141,Pyridines and derivatives,Organoheterocyclic compounds,50
+142,Pyridopyrimidines,Organoheterocyclic compounds,1
+143,Pyrroles,Organoheterocyclic compounds,1
+144,Pyrrolidines,Organoheterocyclic compounds,6
+145,Pyrrolines,Organoheterocyclic compounds,2
+146,Pyrrolizines,Organoheterocyclic compounds,1
+147,Quinolines and derivatives,Organoheterocyclic compounds,25
+148,Quinolizines,Organoheterocyclic compounds,1
+149,Tetrahydrofurans,Organoheterocyclic compounds,3
+150,Tetrahydroisoquinolines,Organoheterocyclic compounds,1
+151,Tetrapyrroles and derivatives,Organoheterocyclic compounds,27
+152,Thiolanes,Organoheterocyclic compounds,1
+153,Triazines,Organoheterocyclic compounds,4
+154,Metal alkyls,Organometallic compounds,1
+155,Organometalloid compounds,Organometallic compounds,9
+156,Allyl sulfur compounds,Organosulfur compounds,5
+157,Isothiocyanates,Organosulfur compounds,2
+158,Organic disulfides,Organosulfur compounds,2
+159,Organic trisulfides,Organosulfur compounds,2
+160,Sulfonyls,Organosulfur compounds,2
+161,Sulfoxides,Organosulfur compounds,4
+162,Thiocyanates,Organosulfur compounds,1
+163,Thioethers,Organosulfur compounds,4
+164,Thiols,Organosulfur compounds,1
+165,2-arylbenzofuran flavonoids,Phenylpropanoids and polyketides,7
+166,Alpha-methyldeoxybenzoin flavonoids,Phenylpropanoids and polyketides,4
+167,Ciguatera toxins,Phenylpropanoids and polyketides,1
+168,Cinnamaldehydes,Phenylpropanoids and polyketides,1
+169,Cinnamic acids and derivatives,Phenylpropanoids and polyketides,79
+170,Cinnamyl alcohols,Phenylpropanoids and polyketides,1
+171,Coumarins and derivatives,Phenylpropanoids and polyketides,46
+172,Depsides and depsidones,Phenylpropanoids and polyketides,4
+173,Diarylheptanoids,Phenylpropanoids and polyketides,13
+174,Flavonoids,Phenylpropanoids and polyketides,391
+175,Isoflavonoids,Phenylpropanoids and polyketides,49
+176,"Linear 1,3-diarylpropanoids",Phenylpropanoids and polyketides,11
+177,Macrolactams,Phenylpropanoids and polyketides,1
+178,Macrolide lactams,Phenylpropanoids and polyketides,1
+179,Macrolides and analogues,Phenylpropanoids and polyketides,13
+180,Ochratoxins and related substances,Phenylpropanoids and polyketides,2
+181,Phenylpropanoic acids,Phenylpropanoids and polyketides,39
+182,Stilbenes,Phenylpropanoids and polyketides,30
+183,Tannins,Phenylpropanoids and polyketides,24
+184,Tetracyclines,Phenylpropanoids and polyketides,1

@@ -11,29 +11,20 @@ plt.rcParams['font.family'] = 'Arial'
 plt.rcParams['axes.unicode_minus'] = False
 
 
-df = pd.read_csv(r'D:\Desktop\time_cycle\z.csv')
-food_df = pd.read_csv(r'D:\Desktop\time_cycle\metabolites.csv')
+df = pd.read_excel('')
+metabolites = pd.read_excel('')
+molecule_to_food = dict(zip(metabolites['Name'], metabolites['food']))
 
 
-additional_coffee_metabolites = [
-    # "1,7-Dimethylxanthine",
-    # "1-Methylxanthine",
-]
-
-
-molecule_to_food = dict(zip(food_df['Name'], food_df['food']))
-for mol in additional_coffee_metabolites:
-    molecule_to_food[mol] = 'coffee'
-
-#sort
-df['sort_key'] = df['date'].astype(str) + ' ' + df['hour']
+# Ensure hour is string before concatenation
+df['sort_key'] = df['date'].astype(str) + ' ' + df['hour'].astype(str)
 df = df.sort_values('sort_key')
+
 
 molecule_cols = [col for col in df.columns if col not in ['date', 'hour', 'sort_key']]
 
-time_labels = [f"{h}" for d, h in zip(df['date'], df['hour'])]
+time_labels = [str(h)[:5] for h in df['hour']]
 
-# Z-score
 zscore_data = pd.DataFrame()
 for col in molecule_cols:
     log_values = np.log1p(df[col])
@@ -53,104 +44,106 @@ for mol in molecule_cols:
     if food in food_order:
         food_molecules[food].append(mol)
 
-coffee_keywords = ['caffeine', 'methylxanthine', 'dimethylxanthine', 'theobromine', 'theophylline',
-                   'caffeic', 'ferulic', 'quinic', 'chlorogenic']
-chocolate_keywords = ['catechin', 'epicatechin', 'theobromine', 'gallic', 'cianidanol']
-banana_keywords = ['dopamine', 'serotonin', 'tryptophan', 'tryptamine']
 
-unknown_metabolites = [mol for mol in molecule_cols if molecule_to_food.get(mol, 'unknown') == 'unknown']
-for mol in unknown_metabolites:
-    mol_lower = mol.lower()
-    if any(keyword in mol_lower for keyword in coffee_keywords):
-        food_molecules['coffee'].append(mol)
-        molecule_to_food[mol] = 'coffee'
-    elif any(keyword in mol_lower for keyword in chocolate_keywords):
-        food_molecules['chocolate'].append(mol)
-        molecule_to_food[mol] = 'chocolate'
-    elif any(keyword in mol_lower for keyword in banana_keywords):
-        food_molecules['banana'].append(mol)
-        molecule_to_food[mol] = 'banana'
-
-
-gap_size = 3
-
-fig = plt.figure(figsize=(14, 14))
-ax = fig.add_subplot(111, projection='polar')
-ax.grid(False)
-ax.xaxis.grid(False)
-ax.yaxis.grid(False)
 
 theta = np.linspace(0, 5 * np.pi / 3, len(time_labels), endpoint=False)
 norm = TwoSlopeNorm(vmin=-3, vcenter=0, vmax=3)
 cmap = plt.cm.seismic
 
-current_radius = 1
-
-for food_idx, food in enumerate(food_order):
+for food in food_order:
     molecules = food_molecules[food]
     if not molecules:
         continue
+    
+   
+    n_mols = len(molecules)
+    if n_mols <= 5:
+        scale_factor = 6.0  
+    elif n_mols <= 10:
+        scale_factor = 3.5
+    elif n_mols <= 20:
+        scale_factor = 2.0
+    else:
+        scale_factor = 1.2
+        
 
+    radius_step = 1.0 * scale_factor
+    bar_height = 0.9 * scale_factor 
+
+
+    fig = plt.figure(figsize=(14, 14))
+    ax = fig.add_subplot(111, projection='polar')
+    ax.grid(False)
+    ax.xaxis.grid(False)
+    ax.yaxis.grid(False)
+    current_radius = 2.0 * scale_factor 
     start_radius = current_radius
-    for mol in molecules:
+    legend_labels = []
+    print(f"\nFood Group: {food} - Plotting Order (Inner ring -> Outer ring):")
+
+    for i, mol in enumerate(molecules):
+        print(f"  Ring {i+1}: {mol}")
+        legend_labels.append(f"{i+1}. {mol}")
+        
         values = zscore_data[mol].values
-        ax.bar(theta, np.ones_like(theta) * 0.8,
+        ax.bar(theta, np.ones_like(theta) * bar_height,
                width=5 * np.pi / (3 * len(theta)),
                bottom=current_radius,
                color=cmap(norm(values)), edgecolor='none', alpha=0.9)
-        current_radius += 1
+        current_radius += radius_step
 
     end_radius = current_radius
-
+    
     outer_circle = mpatches.Circle((0, 0), radius=end_radius,
                                    transform=ax.transData._b,
                                    fill=False, color=food_colors[food],
-                                   linewidth=2.5)
-    ax.add_patch(outer_circle)
+                                   linewidth=3.0 * np.sqrt(scale_factor))
 
-    inner_circle = mpatches.Circle((0, 0), radius=start_radius - 0.5,
+    inner_circle = mpatches.Circle((0, 0), radius=start_radius - (0.1 * scale_factor), 
                                    transform=ax.transData._b,
                                    fill=False, color=food_colors[food],
-                                   linewidth=2.5)
+                                   linewidth=3.0 * np.sqrt(scale_factor))
     ax.add_patch(inner_circle)
 
-    if food_idx < len(food_order) - 1:
-        current_radius += gap_size
 
-ax.set_yticklabels([])
-ax.set_thetamin(-10)
-ax.set_thetamax(290)
-max_r = current_radius + 8
-ax.set_rmax(max_r)
+    ax.set_yticklabels([])
+    ax.set_thetamin(-10)
+    ax.set_thetamax(290)
+    
+    label_offset = 1.0 * scale_factor 
+    label_radius = end_radius + label_offset 
+    max_r = label_radius + (1.5 * scale_factor) 
+    ax.set_rmax(max_r)
+    ax.set_xticks(theta)
+    ax.set_xticklabels([])
+    
+    for angle, label in zip(theta, time_labels):
+        rotation_angle = np.degrees(angle)
+        if 0 <= rotation_angle <= 180:
+            rotation = rotation_angle - 90
+            ha, va = 'right', 'center'
+        else:
+            rotation = rotation_angle - 270
+            ha, va = 'left', 'center'
 
-ax.set_xticks(theta)
-ax.set_xticklabels([])
-label_radius = current_radius + 2.5
-for angle, label in zip(theta, time_labels):
-    rotation_angle = np.degrees(angle)
-    if 0 <= rotation_angle <= 180:
-        rotation = rotation_angle - 90
-        ha, va = 'right', 'center'
-    else:
-        rotation = rotation_angle - 270
-        ha, va = 'left', 'center'
+        font_size = 18 + (scale_factor * 1.5) 
+        text = ax.text(angle, label_radius, label,
+                       rotation=rotation, fontsize=font_size,
+                       rotation_mode='anchor', ha=ha, va=va,
+                       fontname="Arial")  
+        text.set_path_effects([PathEffects.withStroke(linewidth=3, foreground='white')])
 
-    text = ax.text(angle, label_radius, label,
-                   rotation=rotation, fontsize=15,
-                   rotation_mode='anchor', ha=ha, va=va,
-                   fontname="Arial")
-    text.set_path_effects([PathEffects.withStroke(linewidth=3, foreground='white')])
+    cbaxes = fig.add_axes([0.92, 0.25, 0.02, 0.5])
+    cb = plt.colorbar(plt.cm.ScalarMappable(norm=norm, cmap=cmap), cax=cbaxes)
 
-cbaxes = fig.add_axes([0.92, 0.25, 0.02, 0.5])
-cb = plt.colorbar(plt.cm.ScalarMappable(norm=norm, cmap=cmap), cax=cbaxes)
-cb.set_label('Z-score', fontsize=12, fontname="Arial")
-cb.ax.tick_params(labelsize=10)
-for t in cb.ax.get_yticklabels():
-    t.set_fontname("Arial")
+    cb.set_label('Z-score', fontsize=24 + scale_factor, fontname="Arial")
+    cb.ax.tick_params(labelsize=20 + scale_factor)
+    for t in cb.ax.get_yticklabels():
+        t.set_fontname("Arial")
 
-plt.subplots_adjust(right=0.88)
-plt.savefig(r'', dpi=300, bbox_inches='tight')
+    plt.subplots_adjust(right=0.85, left=0.05, bottom=0.05, top=0.95) 
+    save_path = rf'X:\X\X{food}.eps'
+    plt.savefig(save_path, dpi=1000, bbox_inches='tight')
+    plt.close(fig)
 
 
-updated_mapping = [{'Name': mol, 'food': molecule_to_food.get(mol, 'unknown')} for mol in molecule_cols]
-pd.DataFrame(updated_mapping).to_csv(r'D:\Desktop\time_cycle\updated_metabolites.csv', index=False)

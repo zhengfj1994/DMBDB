@@ -6,17 +6,20 @@ from datetime import datetime
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 
-
+# -----------------------------
 plt.rcParams['font.sans-serif'] = ['Arial']
 plt.rcParams['font.family'] = 'Arial'
 plt.rcParams['axes.unicode_minus'] = False
 
-
-df_raw = pd.read_excel(r'')
+# -----------------------------
+# -----------------------------
+df_raw = pd.read_excel('')
 df_raw.set_index('Name', inplace=True)
 
 df_raw.index.name = None
 
+# -----------------------------
+# -----------------------------
 def extract_datetime(col_name):
     match = re.search(r'(\d+)\.(\d+)-(\d{1,2}:\d{2})', col_name)
     if match:
@@ -45,7 +48,8 @@ for dt in sorted_datetimes:
         day_label = day_map[dt.date()]
         x_labels.append(day_label)
 
-
+# -----------------------------
+# -----------------------------
 df_log = np.log1p(df_sorted)
 
 scaler = StandardScaler()
@@ -55,33 +59,41 @@ df_scaled = pd.DataFrame(
     columns=df_log.columns
 )
 
+# -----------------------------
+# -----------------------------
+num_metabolites = len(df_scaled)
+fig_height = max(10, num_metabolites * 0.25 + 2)
 
-plt.figure(figsize=(14, 10))
+plt.figure(figsize=(16, fig_height)) 
 ax = sns.heatmap(
     df_scaled,
     cmap="vlag",
     xticklabels=x_labels,
-    yticklabels=False,
+    yticklabels=True,   
     vmin=-2, vmax=2,
     cbar_kws={"label": "score (log1p transformed)"}
 )
 
 
-ax.set_yticks([])
 ax.set_ylabel('')
+plt.yticks(fontsize=18, fontname="Arial", rotation=0) 
 
-plt.title("Time-Series Heatmap of Metabolites (volunteer 2)", fontsize=16, fontname="Arial")
-plt.xticks(rotation=45, ha='right', fontsize=6, fontname="Arial")
+plt.title("Time-Series Heatmap of Metabolites (volunteer 1)", fontsize=16, fontname="Arial")
+
+step = 5
+locs = np.arange(len(x_labels)) + 0.5
+plt.xticks(locs[::step], x_labels[::step], rotation=45, ha='right', fontsize=16, fontname="Arial")
 
 try:
     cb_ax = ax.figure.axes[-1]
-    cb_ax.set_ylabel("score (log1p transformed)", fontname="Arial")
+    cb_ax.set_ylabel("score (log1p transformed)", fontname="Arial", fontsize=16)
     for t in cb_ax.get_yticklabels():
         t.set_fontname("Arial")
+        t.set_fontsize(16) 
 except Exception:
     pass
 
 plt.tight_layout()
-plt.savefig(r"", dpi=300)
+plt.savefig("", dpi=1000)
 plt.close()
 

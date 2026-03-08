@@ -14,94 +14,125 @@ This project presents a comprehensive AI-powered workflow that combines:
 
 ```
 .
-├── Text mining code/              # AI-powered literature mining pipeline
+├── Text mining code/              # AI-powered literature mining pipeline (10 steps)
+│   ├── 1.Download PMCID.py
+│   ├── 2.Find the FTP download address by using PMCID.R
+│   ├── 3.1Download Literature by PMC.py
+│   ├── 3.2Download Literature by NCBI_Direct.py
+│   ├── 4.code tar.gz.py
+│   ├── 5.Text cleaning.py
+│   ├── 6.Find biomarker.py
+│   ├── 7.Summary of Markers.py
+│   ├── 8.Extract  section.py
+│   ├── 9.Extract specific information.py
+│   └── 10.Transfer format.py
 ├── Quality Control Correction/    # LC-MS data normalization using MetNormalizer
+│   └── metnormalizer.R
 ├── Drawing code/                  # Data visualization scripts
 │   ├── Time heatmap/             # Time-series heatmaps
 │   ├── Circular Time Heatmap/    # Polar coordinate heatmaps
 │   ├── Metabolic trend chart/    # Individual metabolite trends
 │   ├── Bubble score chart/       # Scoring visualizations
 │   └── Dietary biomarker categories/ # Phylogenetic tree-style classification
-├── Supplementary Tables/          # Research datasets and DMBDB
-└── Large Language Model-Generated Dietary Metabolite Biomarker Database...docx
+├── Supplementary Tables/          # Research datasets and DMBDB (9 tables)
+└── README.md                      # This file
 ```
 
 ## 1. Text Mining Pipeline
 
-The text mining pipeline uses Large Language Models (DeepSeek API) to automatically extract dietary biomarker information from scientific literature. The complete workflow includes 11 sequential steps:
+The text mining pipeline uses Large Language Models (DeepSeek API) to automatically extract dietary biomarker information from scientific literature. The complete workflow includes **10 sequential steps**:
 
 ### 1.1 Literature Retrieval & Preprocessing
 
-**Step 1: Download PMCID.py**
+**Step 1: 1.Download PMCID.py**
+- **Function**: Web scraping to download PMCID from PubMed
 - Searches PubMed with article titles
 - Extracts PMID, PMCID, and DOI identifiers
 - Saves results to Excel file
 - **Requirements**: `requests`, `beautifulsoup4`, `pandas`
 
-**Step 2: Find the FTP download address by using PMCID.R**
+**Step 2: 2.Find the FTP download address by using PMCID.R**
+- **Function**: Find literature download addresses based on PMCID
 - Converts PMCID to FTP download URLs for full-text articles
 - **Requirements**: R packages for PMC data access
 
-**Step 3: download Literature.py**
+**Step 3.1: 3.1Download Literature by PMC.py**
+- **Function**: Download literature based on download addresses, including main text and supplementary materials
 - Downloads articles in tar.gz format from FTP URLs
 - Uses PMCID as filename for tracking
 - **Requirements**: `requests`, `pandas`
 
-**Step 4: code tar.gz.py**
-- Extracts compressed tar.gz files
+**Step 3.2: 3.2Download Literature by NCBI_Direct.py**
+- **Function**: For literature with PMCID but cannot be downloaded via PMC, use NCBI Direct method (main text only)
+- Direct download from NCBI PMC website as PDF
+- Uses concurrent processing (5 workers) for efficiency
+- **Requirements**: `requests`, `pandas`, `concurrent.futures`
+
+**Step 4: 4.code tar.gz.py**
+- **Function**: Extract downloaded tar.gz compressed files
+- Extracts compressed archives
 - Prepares articles for text processing
 
-**Step 5: Mineru**
-- Use Mineru to convert PDF files into Markdown format.
-
-**Step 6: Text cleaning.py**
-- Removes reference sections from articles
+**Step 5: 5.Text cleaning.py**
+- **Function**: Clean text converted by Mineru, remove references, images, acknowledgements
+- Use **Mineru** tool to convert PDF files into Markdown format (external tool, see: https://mineru.net/)
+- Removes reference sections (References, Literature Cited, Bibliography)
+- Removes acknowledgements sections
+- Removes image references
 - Converts .md files to .txt format
-- Cleans unnecessary formatting
+- Keeps minimal required text for biomarker extraction
+- **Output**: Cleaned .txt files
 
 ### 1.2 AI-Powered Biomarker Extraction
 
-**Step 7: Find biomarker.py**
-- **Function**: Uses DeepSeek LLM to extract dietary biomarker names from literature
-- **Method**: Processes each .txt file with specialized prompt engineering
-- **Output**: Dietary biomarker names in table format
+**Step 6: 6.Find biomarker.py**
+- **Function**: Use Large Language Model to mine dietary biomarker names from literature
+- Uses DeepSeek LLM to extract dietary biomarker names from literature
+- Processes each .txt file with specialized prompt engineering
 - **Key Features**:
   - Excludes disease-related markers
+  - Excludes inflammatory, immune, or signaling molecules
+  - Excludes hormones and hormone-like regulators
   - Requires full chemical names (not abbreviations)
   - Temperature=0 for consistent results
+  - Concurrent processing with ThreadPoolExecutor
+- **Output**: `Biomarker Name` table format
 
-**Step 8: Summary of Markers.py**
+**Step 7: 7.Summary of Markers.py**
+- **Function**: Create dictionary mapping dietary biomarker names to literature titles
 - Aggregates biomarkers from all processed files
 - Creates a consolidated list with file source tracking
-- Outputs format: `filename: biomarker_name`
+- **Output format**: `filename: biomarker_name`
 
-**Step 9: Extract section.py**
+**Step 8: 8.Extract section.py**
+- **Function**: Find text fragments describing each dietary biomarker
 - Extracts text sections describing each specific biomarker
 - Uses concurrent processing (5 workers) for efficiency
 - Saves individual files per biomarker-paper combination
 - **Output**: `{biomarker_name}_{paper_name}.txt`
 
-**Step 10: Extract specific information.py**
-- **Function**: Extracts detailed structured information for each biomarker:
+**Step 9: 9.Extract specific information.py**
+- **Function**: Extract specific structured information from description fragments
+- Extracts detailed structured information for each biomarker:
   - Biomarker Name
   - Food Source (e.g., coffee, beef, protein intake)
   - Sample Size (number of participants)
   - Biological Sample (e.g., urine 24hr, plasma)
   - Analytic Procedure (e.g., HPLC, FT-ICR-MS)
   - Literature Name (PMCID)
-- **Output**: Markdown table consolidated into CSV
+- **Output**: Markdown table format
 
-**Step 11: Transfer format.py**
+**Step 10: 10.Transfer format.py**
+- **Function**: Convert extracted information from Markdown format to CSV format
 - Converts Markdown tables to CSV format
 - Standardizes data structure for downstream analysis
-
-**Final Output**: `Supplementary Table 2 Text mining results of dietary biomarkers.csv`
+- **Final Output**: `Supplementary Table 3 Text mining results of dietary biomarkers.csv`
 
 ### 1.3 Installation & Setup
 
 ```bash
 # Python dependencies
-pip install openai pandas requests beautifulsoup4
+pip install openai pandas requests beautifulsoup4 tqdm
 
 # R packages (for Step 2)
 # Install required R packages for PMC access
@@ -109,9 +140,18 @@ pip install openai pandas requests beautifulsoup4
 
 **Important**:
 - You must provide your own DeepSeek API key in the scripts
-- Replace `api_key=""` with your actual key
+- Replace `api_key="Please replace your API key."` with your actual key
 - Base URL: `https://api.deepseek.com`
 - Comply with PubMed's terms of service for literature access
+
+### 1.4 External Tools
+
+**Mineru** (Required for Step 5)
+- **Purpose**: Convert PDF files to Markdown format
+- **Website**: https://mineru.net/
+- **Options**: Use online service or deploy locally
+- **Input**: PDF files from Step 3/4
+- **Output**: Markdown (.md) files
 
 ## 2. Quality Control and Data Normalization
 
@@ -284,21 +324,23 @@ install.packages("ggplot2")
 
 ## 4. Supplementary Tables
 
-The `Supplementary Tables/` folder contains all research datasets and database files:
+The `Supplementary Tables/` folder contains all research datasets and database files (**9 tables**):
 
-| File | Description | Content |
-|------|-------------|---------|
-| **Supplementary Table 1** | DMBDB Information | Core Dietary Metabolite Biomarker Database with chemical structures |
-| **Supplementary Table 2** | Text mining results of dietary biomarkers | Extracted dietary biomarkers with metadata from literature analysis |
-| **Supplementary Table 3** | List of Title and Number Correspondence of Literature | Mapping between literature titles and their assigned numbers |
-| **Supplementary Table 4** | Dietary biomarker LC-MS database (Only Open Source Data) | Extended dietary biomarker LC-MS database |
-| **Supplementary Table 5** | The performance of text mining | Performance metrics and scoring for biomarker extraction quality |
-| **Supplementary Table 6** | Annotation results | Metabolomics annotation results from experimental data |
-| **Supplementary Table 7** | Statistical analysis | Statistical analysis results comparing metabolite levels |
+| Table | File Name | Description | Content |
+|-------|-----------|-------------|---------|
+| **S1** | Supplementary Table 1 RT model training dataset.xlsx | RT Model Training Dataset | Training data for retention time prediction models |
+| **S2** | Supplementary Table 2 DMBDB Information.xlsx | DMBDB Information | **Core Database**: Dietary Metabolite Biomarker Database with chemical structures, food sources, and analytical methods |
+| **S3** | Supplementary Table 3 Text mining results of dietary biomarkers.csv | Text Mining Results | Extracted dietary biomarkers with metadata from literature analysis (**Step 10 Output**) |
+| **S4** | Supplementary Table 4 List of Title and Number Correspondence of Literature.xlsx | Literature Mapping | Mapping between literature titles and their assigned numbers |
+| **S5** | Supplementary Table 5 Dietary biomarker LC-MS database (Only Open Source Data).xlsx | LC-MS Database | Extended dietary biomarker LC-MS database (open source data only) |
+| **S6** | Supplementary Table 6 The performance of text mining.xlsx | Text Mining Performance | Performance metrics and quality scores for biomarker extraction |
+| **S7** | Supplementary Table 7 Annotation results.xlsx | Annotation Results | Metabolomics annotation results from experimental data |
+| **S8** | Supplementary Table 8 Statistical analysis.xlsx | Statistical Analysis | Statistical analysis results comparing metabolite levels |
+| **S9** | Supplementary Table 9 Metabolites and metadata of Coffee_Chocolate_Banana.xlsx | Validation Data | Metabolites and metadata from Coffee/Chocolate/Banana validation experiment |
 
 ### 4.1 DMBDB - Dietary Metabolite Biomarker Database
 
-The core database (`Supplementary Table 1 DMBDB Information.csv`) contains comprehensive information for each dietary biomarker:
+The core database (`Supplementary Table 2 DMBDB Information.xlsx`) contains comprehensive information for each dietary biomarker:
 
 **Database Fields**:
 - **Biomarker ID & Name**: Unique identifier and standardized name
@@ -320,63 +362,87 @@ The core database (`Supplementary Table 1 DMBDB Information.csv`) contains compr
 
 ## 5. Complete Workflow Diagram
 
+### 5.1 Text Mining Pipeline (10 Steps)
+
 ```mermaid
 graph TD
-    A[Workflow Start] --> B[Download PMCID.py<br/>Get PMID/PMCID/DOI]
-    B --> C[Find FTP URLs.R<br/>Get Download Links]
-    C --> D[download Literature.py<br/>Download tar.gz Files]
-    D --> E[code tar.gz.py<br/>Extract Archives]
-    E --> F[Mineru<br/>pdf to MD]
-    F --> G[Text cleaning.py<br/>Remove References]
-    G --> H[Find biomarker.py<br/>LLM Extract Names]
-    H --> I[Summary of Markers.py<br/>Aggregate Results]
-    I --> J[Extract section.py<br/>Get Descriptions]
-    J --> K[Extract specific info.py<br/>Get Detailed Data]
-    K --> L[Supplementary Table 2<br/>Text Mining Results]
-    L --> M[DMBDB Construction<br/>Supplementary Table 1]
-    M --> N[Transfer format.py<br/>MD to CSV]
+    A[Step 1<br/>Download PMCID.py<br/>Get PMID/PMCID/DOI] --> B[Step 2<br/>Find FTP URLs.R<br/>Get Download Links]
+    B --> C{Download Method}
+    C -->|PMC Available| D[Step 3.1<br/>Download by PMC.py<br/>Full Text + Supplements]
+    C -->|PMC Not Available| E[Step 3.2<br/>Download by NCBI_Direct.py<br/>Main Text Only]
+    D --> F[Step 4<br/>code tar.gz.py<br/>Extract Archives]
+    E --> F
+    F --> G[External Tool<br/>Mineru<br/>PDF to Markdown]
+    G --> H[Step 5<br/>Text cleaning.py<br/>Remove Refs/Images/Ack]
+    H --> I[Step 6<br/>Find biomarker.py<br/>LLM Extract Names]
+    I --> J[Step 7<br/>Summary of Markers.py<br/>Create Dictionary]
+    J --> K[Step 8<br/>Extract section.py<br/>Get Descriptions]
+    K --> L[Step 9<br/>Extract specific info.py<br/>Get Detailed Data]
+    L --> M[Step 10<br/>Transfer format.py<br/>MD to CSV]
+    M --> N[Supplementary Table 3<br/>Text Mining Results]
+    N --> O[DMBDB Construction<br/>Supplementary Table 2]
 
-    O[LC-MS Raw Data] --> P[Quality Control<br/>metnormalizer.R]
-    P --> Q[QC Corrected Data]
+    style O fill:#ff9999
+    style G fill:#ffff99
+```
 
-    N --> R[Data Annotation<br/>Using DMBDB]
-    Q --> R
-    R --> S[Annotated Data<br/>Supplementary Table 6]
-    S --> T[Statistical Analysis<br/>Supplementary Table 7]
+### 5.2 Complete Analysis Workflow
 
-    T --> U[Visualizations]
-    U --> V[Time Heatmap]
-    U --> W[Circular Heatmap]
-    U --> X[Trend Charts]
-    U --> Y[Bubble Chart]
-    U --> Z[Category Tree]
+```mermaid
+graph TD
+    subgraph "Text Mining Pipeline"
+    T1[Steps 1-10] --> T2[Supplementary Table 3]
+    end
 
-    style M fill:#ff9999
-    style Q fill:#99ccff
-    style T fill:#99ff99
+    T2 --> D[DMBDB<br/>Supplementary Table 2]
+
+    subgraph "Metabolomics Data Processing"
+    M1[LC-MS Raw Data] --> M2[Quality Control<br/>metnormalizer.R]
+    M2 --> M3[QC Corrected Data]
+    end
+
+    D --> A[Data Annotation<br/>Using DMBDB]
+    M3 --> A
+    A --> S1[Annotation Results<br/>Supplementary Table 7]
+    S1 --> S2[Statistical Analysis<br/>Supplementary Table 8]
+
+    S2 --> V[Visualizations]
+    V --> V1[Time Heatmap]
+    V --> V2[Circular Heatmap]
+    V --> V3[Trend Charts]
+    V --> V4[Bubble Chart]
+    V --> V5[Category Tree]
+
+    style D fill:#ff9999
+    style M3 fill:#99ccff
+    style S2 fill:#99ff99
 ```
 
 **Workflow Summary**:
-1. **Literature Mining** (Steps A→L): AI-powered extraction of dietary biomarkers from PubMed literature
-2. **Database Construction** (Step M): Building DMBDB from extracted information
-3. **Data Processing** (Steps N→P): Quality control and normalization of metabolomics data
-4. **Data Annotation** (Step Q): Matching experimental data with DMBDB
-5. **Statistical Analysis** (Steps R→S): Differential analysis and scoring
-6. **Visualization** (Steps T→Y): Multi-dimensional data visualization
+1. **Literature Mining** (Steps 1-10): AI-powered extraction of dietary biomarkers from PubMed literature
+2. **Database Construction**: Building DMBDB (Supplementary Table 2) from extracted information
+3. **Data Processing**: Quality control and normalization of metabolomics data using MetNormalizer
+4. **Data Annotation**: Matching experimental data with DMBDB
+5. **Statistical Analysis**: Differential analysis and scoring
+6. **Visualization**: Multi-dimensional data visualization
 
 ## 6. Key Features
 
-- **Automated Literature Mining**: Uses Large Language Models (DeepSeek) to extract dietary biomarkers from thousands of scientific papers with high precision
-- **Comprehensive Database**: DMBDB contains detailed chemical, biological, and analytical information for dietary biomarkers
-- **Rigorous Quality Control**: MetNormalizer-based QC with parameter optimization ensures data reliability
+- **10-Step Automated Literature Mining**: Systematic AI-powered workflow using Large Language Models (DeepSeek) to extract dietary biomarkers from scientific papers with high precision
+  - Steps 1-2: Literature retrieval (PMCID/DOI extraction)
+  - Steps 3-5: Document acquisition and preprocessing (PDF → Markdown → Clean Text)
+  - Steps 6-10: AI extraction and structured data generation
+- **Dual Download Strategy**: Supports both PMC (full text + supplements) and NCBI Direct (main text) methods for comprehensive literature coverage
+- **Comprehensive Database**: DMBDB (Supplementary Table 2) contains detailed chemical, biological, and analytical information for dietary biomarkers
+- **Rigorous Quality Control**: MetNormalizer-based QC with parameter optimization ensures metabolomics data reliability
 - **Multi-Dimensional Visualization**: Five complementary visualization approaches for exploring temporal metabolic patterns:
   - Time-series heatmaps for overview
   - Circular polar plots for food-specific patterns
   - Individual trend charts for detailed tracking
   - Bubble charts for scoring visualization
   - Phylogenetic-style trees for classification
-- **Reproducible Research**: All code, data, and workflows provided for full reproducibility
-- **Food Intake Validation**: Experimental validation with controlled food consumption (coffee, chocolate, banana)
+- **Reproducible Research**: All code, data (9 supplementary tables), and workflows provided for full reproducibility
+- **Food Intake Validation**: Experimental validation with controlled food consumption (coffee, chocolate, banana) - Supplementary Table 9
 
 ## 7. Usage Examples
 
@@ -384,30 +450,35 @@ graph TD
 
 ```bash
 # Step 1: Get PMCIDs from article titles
-python "Text mining code/Download PMCID.py"
+python "Text mining code/1.Download PMCID.py"
 
 # Step 2: Get FTP download URLs (R script)
-Rscript "Text mining code/Find the FTP download address by using PMCID.R"
+Rscript "Text mining code/2.Find the FTP download address by using PMCID.R"
 
-# Step 3: Download literature
-python "Text mining code/download Literature.py"
+# Step 3: Download literature (choose based on availability)
+# Option 3.1: PMC method (recommended, includes supplements)
+python "Text mining code/3.1Download Literature by PMC.py"
+# Option 3.2: NCBI Direct method (main text only, for PMC-restricted articles)
+python "Text mining code/3.2Download Literature by NCBI_Direct.py"
 
-# Step 4-6: Process and clean text
-python "Text mining code/code tar.gz.py"
-mineru:https://mineru.net/ or deploy the mineru model locally
-python "Text mining code/Text cleaning.py"
+# Step 4: Extract compressed archives
+python "Text mining code/4.code tar.gz.py"
 
-# Step 7-10: Extract biomarker information using LLM
-python "Text mining code/Find biomarker.py"
-python "Text mining code/Summary of Markers.py"
-python "Text mining code/Extract section.py"
-python "Text mining code/Extract specific information.py"
+# Step 5: Convert PDF to Markdown using Mineru, then clean text
+# External tool: https://mineru.net/ (online or local deployment)
+python "Text mining code/5.Text cleaning.py"
+
+# Step 6-10: Extract biomarker information using LLM
+python "Text mining code/6.Find biomarker.py"
+python "Text mining code/7.Summary of Markers.py"
+python "Text mining code/8.Extract section.py"
+python "Text mining code/9.Extract specific information.py"
+python "Text mining code/10.Transfer format.py"
 ```
 
-# Step 11: Output the data in CSV format.
-python "Text mining code/Transfer format.py
+**Output**: `Supplementary Table 3 Text mining results of dietary biomarkers.csv`
 
-**Note**: Remember to configure your DeepSeek API key in each script that uses the LLM.
+**Note**: Remember to configure your DeepSeek API key in scripts 6, 8, and 9 that use the LLM.
 
 ### 7.2 Quality Control and Normalization
 
@@ -470,6 +541,7 @@ pip install scikit-learn>=1.0.0
 pip install requests>=2.26.0
 pip install beautifulsoup4>=4.10.0
 pip install openpyxl>=3.0.0
+pip install tqdm>=4.62.0
 ```
 
 ### 9.2 R Environment
@@ -501,24 +573,31 @@ BiocManager::install("ggtree")
 ## 10. Data Availability
 
 All supplementary data files are included in the `Supplementary Tables/` folder:
-- ✅ DMBDB database (CSV format)
-- ✅ Text mining results of dietary biomarkers (CSV format)
-- ✅ List of Title and Number Correspondence of Literature (Excel format)
-- ✅ Dietary biomarker LC-MS database (Excel format, Open Source Data only)
-- ✅ Text mining performance metrics and quality scores (Excel format)
-- ✅ Annotation results (Excel format)
-- ✅ Statistical analysis results (Excel format)
 
-**Note**: Some intermediate files (downloaded literature, extracted text) are not included due to size constraints but can be regenerated using the provided scripts.
+| Table | Format | Description |
+|-------|--------|-------------|
+| ✅ S1: RT Model Training Dataset | Excel (.xlsx) | Retention time prediction training data |
+| ✅ S2: DMBDB Information | Excel (.xlsx) | Core dietary biomarker database |
+| ✅ S3: Text Mining Results | CSV (.csv) | Extracted biomarkers from literature |
+| ✅ S4: Literature Correspondence | Excel (.xlsx) | Title-number mapping |
+| ✅ S5: LC-MS Database | Excel (.xlsx) | Open source LC-MS data |
+| ✅ S6: Text Mining Performance | Excel (.xlsx) | Quality metrics and scores |
+| ✅ S7: Annotation Results | Excel (.xlsx) | Metabolomics annotation output |
+| ✅ S8: Statistical Analysis | Excel (.xlsx) | Statistical comparison results |
+| ✅ S9: Coffee/Chocolate/Banana Data | Excel (.xlsx) | Validation experiment data |
+
+**Note**: Some intermediate files (downloaded literature, extracted text) are not included due to size constraints but can be regenerated using the provided scripts (Steps 1-10).
 
 ## 11. Important Notes Before Running
 
-1. **API Keys**: Configure your DeepSeek API key in all LLM-based scripts
-2. **File Paths**: Update all file paths in scripts to match your local directory structure
-3. **PubMed Compliance**: Ensure compliance with PubMed's terms of service for literature mining
-4. **Data Privacy**: Do not commit API keys or sensitive data to version control
-5. **Sequential Execution**: Text mining pipeline steps must be run in order (Steps 1-10)
-6. **Large Files**: Some scripts generate many output files; ensure sufficient disk space
+1. **API Keys**: Configure your DeepSeek API key in all LLM-based scripts (Steps 6, 8, 9)
+2. **External Tools**: Install and configure Mineru for PDF-to-Markdown conversion (Step 5)
+3. **File Paths**: Update all file paths in scripts to match your local directory structure
+4. **PubMed Compliance**: Ensure compliance with PubMed's terms of service for literature mining
+5. **Data Privacy**: Do not commit API keys or sensitive data to version control
+6. **Sequential Execution**: Text mining pipeline steps must be run in order (Steps 1-10)
+7. **Download Methods**: Choose between Step 3.1 (PMC, recommended) or 3.2 (NCBI Direct) based on article availability
+8. **Large Files**: Some scripts generate many output files; ensure sufficient disk space (~10GB recommended)
 
 ## 12. Troubleshooting
 
@@ -567,6 +646,6 @@ For questions, collaborations, or support:
 
 ---
 
-**Last Updated**: 2025-10-15
+**Last Updated**: 2025-03-08
 
-**Repository Maintainers**: Fujian Zheng；Zijun Nie
+**Repository Maintainers**: Fujian Zheng; Zijun Nie
